@@ -1,0 +1,349 @@
+<style>
+  #itw-table-wrapper {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;      
+    padding: 8px;
+    font-family: sans-serif;
+  }
+  
+  #metricSearchInput {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    box-sizing: border-box;
+  }
+
+  .itw-scroll-container {
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+  }
+
+  #myMetricTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.1;
+  }
+
+  .metric-list-title {
+    background-color: #e2e8f0 !important;
+    color: #0f172a;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 800;
+    text-align: center;
+    padding: 6px 2px !important; 
+    border-bottom: 2px solid #cbd5e1 !important;
+  }
+
+  #myMetricTable th {
+    position: sticky;
+    top: 0;
+    padding: 4px 8px;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #333;
+    z-index: 10;
+    white-space: nowrap;
+  }
+
+  #myMetricTable td {
+    padding: 4px 8px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
+
+  /* ITW_ID Styling */
+  .itw-id-cell {
+    white-space: normal;
+    word-break: break-all;
+    min-width: 90px;
+    font-family: monospace;
+    color: #64748b;
+  }
+
+  .id-prefix {
+    color: #000080; 
+    font-weight: 800;
+    display: block;
+  }
+
+  .chevron-link {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .highlight-blue {
+    background-color: #e0f2fe !important; 
+    border-left: 4px solid #2563eb;
+    font-weight: 600;
+  }
+  
+  .suite-header {
+    background-color: #f8fafc;
+    font-weight: bold;
+    color: #475569;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  /* BERT Link Styling */
+  .bert-link {
+    font-weight: bold;
+    color: #0f172a;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+
+  .bert-link:hover {
+    text-decoration: underline;
+    color: #2563eb;
+  }
+</style>
+
+<div id="itw-table-wrapper">
+  <input type="text" id="metricSearchInput" onkeyup="searchMetricTable()" placeholder="Search registry (e.g. Air Canada, NIST, ITW-1018)...">
+
+  <div class="itw-scroll-container">
+    <table id="myMetricTable">
+      <thead>
+        <tr>
+          <th colspan="8" class="metric-list-title">Logic RFC™ Registry</th>
+        </tr>
+        <tr>
+          <th>Link</th>
+          <th>ITW_ID</th>
+          <th>Category</th>
+          <th>ISIC Section</th>
+          <th>Div</th>
+          <th>BERT</th>
+          <th>Description</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="suite-header"><td colspan="8">Core Business Operations</td></tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1001</span>.03-G.047-REF.001</td>
+          <td>Marketing/Sales</td>
+          <td>Wholesale/Retail</td>
+          <td>47</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">84.9%</a></td>
+          <td>Customer Loyalty Forecaster</td>
+          <td>Predicts if a customer is coming back based on buying habits.</td>
+        </tr>
+        <tr class="highlight-blue">
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1002</span>.06-H.051-REF.001</td>
+          <td>Customer Service</td>
+          <td>Transport/Storage</td>
+          <td>51</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">85.2%</a></td>
+          <td>The "Air Canada" Guard</td>
+          <td>Ensures chatbots don't invent fake policies for grieving customers.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1003</span>.04.C.10.X.001</td>
+          <td>Delivery (Physical)</td>
+          <td>Manufacturing</td>
+          <td>10</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">84.1%</a></td>
+          <td>Inventory Master Sync</td>
+          <td>Prevents online stores from selling out-of-stock warehouse items.</td>
+        </tr>
+
+        <tr class="suite-header"><td colspan="8">Resilience & Hallucination Defense</td></tr>
+        <tr class="highlight-blue">
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1004</span>.12.M.069</td>
+          <td>Risk/Legal</td>
+          <td>Professional</td>
+          <td>69</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">85.2%</a></td>
+          <td>The "Mata v. Avianca" Truth Filter</td>
+          <td>Stops AI from making up fake laws or fictional court cases.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1005</span>.03.M.072</td>
+          <td>PR/Science</td>
+          <td>Technical</td>
+          <td>72</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">84.4%</a></td>
+          <td>Fact Checker (Technical)</td>
+          <td>Prevents impossible scientific claims in technical marketing.</td>
+        </tr>
+        <tr class="highlight-blue">
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1006</span>.03.G.045</td>
+          <td>Sales/Contract</td>
+          <td>Motor Vehicles</td>
+          <td>45</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">86.8%</a></td>
+          <td>The "Chevy Tahoe" Price Protector</td>
+          <td>Prevents chatbots from selling $50k trucks for $1 by mistake.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1007</span>.02.K.064</td>
+          <td>Operations/Risk</td>
+          <td>Financial</td>
+          <td>64</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">84.9%</a></td>
+          <td>Financial Kill-Switch</td>
+          <td>Shuts down automated spending if a logic error is detected.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1008</span>.09.Q.086</td>
+          <td>Information Tech</td>
+          <td>Human Health</td>
+          <td>86</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">84.7%</a></td>
+          <td>Health Advice Safety Rail</td>
+          <td>Keeps medical AI within the bounds of the official manual.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1009</span>.04.C.028</td>
+          <td>Safety/HSE</td>
+          <td>Manufacturing</td>
+          <td>28</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">82.6%</a></td>
+          <td>Robot Safety Boundary</td>
+          <td>Hard-codes safety zones for machines to protect floor workers.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW_1010</span>.05-D.035-REF.001</td>
+          <td>Energy/Utility</td>
+          <td>Utilities</td>
+          <td>35</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">81.9%</a></td>
+          <td>Power Bill Stabilizer</td>
+          <td>Adjusts smart energy use to prevent blackouts during stress.</td>
+        </tr>
+
+        <tr class="suite-header"><td colspan="8">High-Stakes Macro Resilience</td></tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW_1011</span>.08-C.028-REF.001</td>
+          <td>Supply Chain</td>
+          <td>Manufacturing</td>
+          <td>10</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">82.4%</a></td>
+          <td>Supplier Background Check</td>
+          <td>Verifies that vendors meet quality and ethical standards.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW_1012</span>.11-M.069-REF.001</td>
+          <td>Legal/Compliance</td>
+          <td>Professional</td>
+          <td>69</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">82.8%</a></td>
+          <td>Global Rule Follower</td>
+          <td>Ensures business logic respects local laws in other countries.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW_1013</span>.12-Q.086-REF.001</td>
+          <td>Healthcare</td>
+          <td>Human Health</td>
+          <td>86</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">82.7%</a></td>
+          <td>Patient Safety Checklist</td>
+          <td>The digital "final check" to prevent clinical treatment errors.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW_1014</span>.01-A.001-REF.001</td>
+          <td>ESG/Sustainability</td>
+          <td>Agriculture</td>
+          <td>01</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">81.8%</a></td>
+          <td>The "Greenwashing" Filter</td>
+          <td>Proves environmental claims are backed by data, not fluff.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW_1015</span>.04-H.052-REF.001</td>
+          <td>Logistics/Risk</td>
+          <td>Transport/Storage</td>
+          <td>52</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">83.2%</a></td>
+          <td>Medicine Cold-Chain Alarm</td>
+          <td>Monitors shipping temps to ensure vaccines stay safe and effective.</td>
+        </tr>
+
+        <tr class="suite-header"><td colspan="8">NIST CSWP 50 (Small Business) Series</td></tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1016</span>.03-M.073-REF.001</td>
+          <td>Customer Service</td>
+          <td>Accomm/Food</td>
+          <td>56</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">84.3%</a></td>
+          <td>The Digital Content Creator</td>
+          <td>NIST CSWP 50 Use Case 1.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1017</span>.03-M.070-REF.001</td>
+          <td>Lead Gen/Risk</td>
+          <td>Professional</td>
+          <td>70</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">86.5%</a></td>
+          <td>The Independent Professional Services Provider</td>
+          <td>NIST CSWP 50 Use Case 2.</td>
+        </tr>
+        <tr>
+          <td><a href="#" class="chevron-link">»</a></td>
+          <td class="itw-id-cell"><span class="id-prefix">ITW-1018</span>.11-F.432-REF.001</td>
+          <td>Risk/Resiliency</td>
+          <td>Construction</td>
+          <td>432</td>
+          <td><a href="https://www.ifthenwhy.ai/bert-scores" class="bert-link">85.9%</a></td>
+          <td>The Micro-Retailer / Service Provider</td>
+          <td>NIST CSWP 50 Use Case 3.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function searchMetricTable() {
+  var input = document.getElementById("metricSearchInput");
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById("myMetricTable");
+  var tr = table.getElementsByTagName("tr");
+
+  for (var i = 2; i < tr.length; i++) { 
+    if (tr[i].classList.contains('suite-header')) continue;
+    var visible = false;
+    var td = tr[i].getElementsByTagName("td");
+    for (var j = 1; j < td.length; j++) {
+      if (td[j] && td[j].innerText.toUpperCase().indexOf(filter) > -1) {
+        visible = true;
+        break;
+      }
+    }
+    tr[i].style.display = visible ? "" : "none";
+  }
+}
+</script>
