@@ -1,30 +1,9 @@
 # The Plain Text of AI
 Companion files for *The Plain Text of AI*
 
-Welcome! This is the official repository for the book **"The Plain Text of AI"**. 
+Welcome! This is the official repository for  **"The Plain Text of AI"**. 
 
-If you are reading the book, this is where you can grab all the templates, example text files, and code blocks we talk about so you don't have to type them out from scratch.
-
----
-## Conceptual Foundations: The Plain Text of AI
-
-The If-Then-Why framework isn't built on rigid physical infrastructure; it is built on human common sense. To understand how these text maps eliminate data friction and anchor AI models, we look at five core analogies detailed in the companion book, *The Plain Text of AI*:
-
-### 1. The Soggy Pastry Example
-Highlights what happens when data layers lack a solid foundation or structure before being handed to an LLM.
-
-### 2. The Daughter Drawing on the Wall
-Explains the critical line between a mechanical action (The Then) and its underlying strategic intent (The Why). 
-
-### 3. The Teenager That Tunes You Out
-Demonstrates context window friction—what happens when you dump an unorganized, massive wall of text into an AI model and it simply tunes out the instructions in the middle.
-
-### 4. The "I'm Not Eating That" Cake Example
-Illustrates the failure of an ungrounded AI assistant that ignores the master menu rules (deterministic constraints) and confidently serves up an unusable mess.
-
-### 5. The Truth-Teller and the Brazen, Confident Liar
-Exposes the core issue of data trust with AI. Models are trained to look for question-and-answer formats that include the underlying reasoning that supports the data—which is exactly what the If-Then-Why framework provides.
-
+This repository contains the markdown maps, code, and structured text files discussed on the show. Explore how prioritizing intent over infrastructure and utilizing clean, human-readable formats optimizes LLM context, prevents hallucinations, and builds better data architectures.
 ---
 
 ## ✊ Human Common Sense Over Machine Noise
@@ -56,8 +35,9 @@ When you look through these files, you'll see how simple text layouts can give y
 
 The files in this repository match up exactly with the chapters in the book:
 
-* **Chapter 1:** Rules for clear instructions and a look at great text editors.
-* **Chapter 2:** How to shape your data and information.
-* **Chapter 3:** How to use the If-Then-Why files to keep the AI from hallucinating.
-* **Chapter 4:** Practical examples of generating code, slide layouts, and diagrams from pure text.
-* **Chapter 5:** Bringing it all together to build a secure system you can rely on.
+* **Part 1 Introduction:** Explore the plain text of AI, Markdown, JSON, HTML, XML, Mermaid, Python, and CSV to provide structure and clarity.
+* **Part 1 Clear Instructions:** Rules for clear instructions.
+* **Part 1 The Land of the Truthtellers and the Liars:** How to use context to prevent AI from hallucinating.
+* **Part 2 Images (HTML, Mermaid, Python):** Practical examples of generating code, slide layouts, and diagrams from pure text.
+* **Part 2 Markdown:** A look at great text editors and Markdown syntax.
+* **Part 2 Shaping Data and Information**  How to shape your data and information.
