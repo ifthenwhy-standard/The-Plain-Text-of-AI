@@ -1,0 +1,98 @@
+<div style="font-family: sans-serif; max-width: 900px; margin: 0 auto; color: #333;">
+  
+  <!-- Instructions & Challenges Box -->
+  <div style="background: #f4f6f8; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #0056b3;">
+    <h3 style="margin-top: 0; margin-bottom: 10px;">Interactive Markdown - Challenge #3</h3>
+    <p style="margin-top: 0; font-size: 15px; line-height: 1.5;">
+      Add Horizontal Rules to tell the AI, "The previous thought is complete; clear your immediate focus and start a new logical block."
+    </p>
+
+    <ul id="challenge-list" style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+      <li id="chk-hr" style="display: none;">Add a horizontal rule (<code style="background:#e2e8f0; padding:2px 4px; border-radius:3px;">---</code>) between the topics</li>
+    </ul>
+
+    <!-- Hint / Tip Banner (Hidden by default on load, shown only after user types if missing) -->
+    <div id="hint-banner" style="display: none; margin-top: 15px; padding: 10px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 5px; font-size: 14px;">
+      💡 <strong>Tip:</strong> Add a horizontal rule (---) between the topics
+    </div>
+    
+    <!-- Success Banner -->
+    <div id="success-banner" style="display: none; margin-top: 15px; padding: 10px; background: #d4edda; color: #155724; border-radius: 5px; font-weight: bold; text-align: center;">
+      🎉 Amazing job! Horizontal rule added successfully. The AI now recognizes separate logical blocks.
+    </div>
+  </div>
+
+  <!-- Split Pane Editor -->
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <!-- Left Pane: Input -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px;">Edit your Markdown here to add a horizontal rule</label>
+      <textarea id="markdown-input" style="width: 100%; height: 250px; padding: 12px; font-family: monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;">Topic One: Data Architecture
+Review primary data sources and schema definitions.
+
+
+
+Topic Two: Visualization Standards
+Confirm color palettes adhere to accessibility guidelines.</textarea>
+    </div>
+    
+    <!-- Right Pane: Live Preview -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px;">Live Preview:</label>
+      <div id="markdown-output" style="width: 100%; height: 250px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background: #fff; overflow-y: auto; box-sizing: border-box;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Pull in the lightweight Markdown parser CDN -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  const input = document.getElementById('markdown-input');
+  const output = document.getElementById('markdown-output');
+  
+  const chkHr = document.getElementById('chk-hr');
+  const hintBanner = document.getElementById('hint-banner');
+  const successBanner = document.getElementById('success-banner');
+
+  let userHasTyped = false;
+
+  function updateEditor() {
+    const text = input.value;
+    
+    // 1. Render live HTML using marked
+    output.innerHTML = marked.parse(text);
+
+    // 2. Validation Check for horizontal rule (three dashes on a row)
+    const hasHorizontalRule = /^---\s*$/m.test(text);
+
+    if (hasHorizontalRule) {
+      // Success state (displays checklist item in green without strike-through)
+      chkHr.style.display = 'block';
+      chkHr.style.color = '#28a745';
+      chkHr.style.textDecoration = 'none';
+      successBanner.style.display = 'block';
+      hintBanner.style.display = 'none';
+    } else {
+      // Incomplete state
+      chkHr.style.display = 'none';
+      successBanner.style.display = 'none';
+
+      // Show the tip only if the user has actively typed something and it's missing the rule
+      if (userHasTyped && text.trim().length > 0) {
+        hintBanner.style.display = 'block';
+      } else {
+        hintBanner.style.display = 'none';
+      }
+    }
+  }
+
+  // Initial render on load (won't trigger userHasTyped tip)
+  updateEditor();
+
+  // Listen for typing input
+  input.addEventListener('input', () => {
+    userHasTyped = true;
+    updateEditor();
+  });
+</script>

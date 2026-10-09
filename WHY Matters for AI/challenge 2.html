@@ -1,0 +1,100 @@
+<div style="font-family: sans-serif; max-width: 900px; margin: 0 auto; color: #333;">
+  
+  <!-- Instructions & Challenges Box -->
+  <div style="background: #f4f6f8; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #0056b3;">
+    <h3 style="margin-top: 0; margin-bottom: 10px;">Interactive Markdown - Challenge #2</h3>
+    <p style="margin-top: 0; font-size: 15px; line-height: 1.5;">
+      Markdown is a learn-by-doing skill. Try the challenge below in the editor on the left!
+    </p>
+
+    <!-- Example Box (Hidden by default) -->
+    <div id="syntax-ref" style="display: none; background: #fff; border: 1px solid #d1d5db; padding: 12px 15px; border-radius: 6px; margin: 15px 0; font-size: 13px;">
+      <span style="font-weight: bold; color: #555; display: block; margin-bottom: 6px;">Quick Syntax Reference:</span>
+      <code style="display: block; background: #f1f5f9; padding: 6px 10px; border-radius: 4px; font-family: monospace;"># My Heading</code>
+    </div>
+
+    <ul id="challenge-list" style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">
+      <li id="chk-heading">Create a Level 1 Heading and a Level 2 Heading</li>
+    </ul>
+
+    <!-- Hint / Popup Message -->
+    <div id="hint-banner" style="display: none; margin-top: 15px; padding: 10px; background: #fff3cd; color: #856404; border: 1px solid #ffeeba; border-radius: 5px; font-size: 14px;">
+      💡 <strong>Hint:</strong> Don't forget the space after the # and try again!
+    </div>
+    
+    <!-- Success Banner -->
+    <div id="success-banner" style="display: none; margin-top: 15px; padding: 10px; background: #d4edda; color: #155724; border-radius: 5px; font-weight: bold; text-align: center;">
+      🎉 Amazing job! Heading created successfully. You're ready for Tableau Agent!
+    </div>
+  </div>
+
+  <!-- Split Pane Editor -->
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <!-- Left Pane: Input -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px;">Type your Markdown here:</label>
+      <textarea id="markdown-input" placeholder="# Type your heading here..." style="width: 100%; height: 250px; padding: 12px; font-family: monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;"></textarea>
+    </div>
+    
+    <!-- Right Pane: Live Preview -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px;">Live Preview:</label>
+      <div id="markdown-output" style="width: 100%; height: 250px; padding: 12px; border: 1px solid #ccc; border-radius: 6px; background: #fff; overflow-y: auto; box-sizing: border-box;"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Pull in the lightweight Markdown parser CDN -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  const input = document.getElementById('markdown-input');
+  const output = document.getElementById('markdown-output');
+  
+  const chkHeading = document.getElementById('chk-heading');
+  const syntaxRef = document.getElementById('syntax-ref');
+  const hintBanner = document.getElementById('hint-banner');
+  const successBanner = document.getElementById('success-banner');
+
+  function updateEditor() {
+    const text = input.value;
+    
+    // 1. Render live HTML
+    output.innerHTML = marked.parse(text);
+
+    // 2. Validation Checks
+    const hasCorrectHeading = /^#\s+.+/m.test(text);
+    const hasMissingSpace = /^#[^\s#].*/m.test(text);
+
+    if (hasCorrectHeading) {
+      // Success state
+      chkHeading.style.color = '#28a745';
+      chkHeading.style.textDecoration = 'line-through';
+      successBanner.style.display = 'block';
+      hintBanner.style.display = 'none';
+      syntaxRef.style.display = 'none';
+    } else {
+      // Incomplete/Wrong state
+      chkHeading.style.color = '#333';
+      chkHeading.style.textDecoration = 'none';
+      successBanner.style.display = 'none';
+
+      // Show Quick Syntax Reference if they typed something incorrect
+      if (text.trim().length > 0) {
+        syntaxRef.style.display = 'block';
+      } else {
+        syntaxRef.style.display = 'none';
+      }
+
+      // Show friendly hint if they attempted a heading without a space
+      if (hasMissingSpace) {
+        hintBanner.style.display = 'block';
+      } else {
+        hintBanner.style.display = 'none';
+      }
+    }
+  }
+
+  // Listen for typing
+  input.addEventListener('input', updateEditor);
+</script>
