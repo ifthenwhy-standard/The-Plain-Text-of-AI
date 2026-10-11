@@ -1,0 +1,84 @@
+<div id="main-wrapper" style="font-family: sans-serif; max-width: 900px; margin: 0 auto; color: #0f172a; background: #e0f2fe; padding: 25px; border-radius: 12px; border: 2px solid #38bdf8; transition: background 0.3s, border-color 0.3s;">
+  
+  <!-- Instructions & Challenges Box -->
+  <div style="background: #ffffff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(3, 105, 161, 0.05);">
+    <h3 style="margin-top: 0; margin-bottom: 10px; color: #0369a1;">Interactive AI Chat - Challenge #4</h3>
+    <p style="margin-top: 0; font-size: 15px; line-height: 1.5; color: #334155;">
+      When writing multi-line prompts to an AI chat assistant, pressing <kbd style="background:#e2e8f0; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace;">Enter</kbd> accidentally sends your message before you're finished. How do you add a line return?
+    </p>
+
+    <!-- Hidden by default until user types without Shift+Enter -->
+    <ul id="challenge-list" style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; color: #334155;">
+      <li id="chk-multiline" style="display: none;">Use <code style="background:#e2e8f0; color:#0f172a; padding:2px 4px; border-radius:3px;">Shift + Enter</code> in the chat box below to create a multi-line message</li>
+    </ul>
+
+    <!-- Hint / Tip Banner -->
+    <div id="hint-banner" style="display: none; margin-top: 15px; padding: 10px; background: #bae6fd; color: #0369a1; border: 1px solid #38bdf8; border-radius: 5px; font-size: 14px;">
+      💡 <strong>Tip:</strong> Try holding down <code style="background:#e2e8f0; color:#0f172a; padding:2px 4px; border-radius:3px;">Shift</code> while pressing <code style="background:#e2e8f0; color:#0f172a; padding:2px 4px; border-radius:3px;">Enter</code> to add a line return without submitting!
+    </div>
+    
+    <!-- Success Banner -->
+    <div id="success-banner" style="display: none; margin-top: 15px; padding: 10px; background: #e2e8f0; color: #475569; border: 1px solid #cbd5e1; border-radius: 5px; font-weight: bold; text-align: center;">
+      🎉 Nailed it! Multi-line prompt formatting unlocked. You're ready to construct clean, complex instructions for your AI agent!
+    </div>
+  </div>
+
+  <!-- Split Pane Editor -->
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <!-- Left Pane: Input -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px; color: #0369a1;">Type your multi-line prompt here:</label>
+      <textarea id="chat-input" style="width: 100%; height: 200px; padding: 12px; font-family: system-ui, -apple-system, sans-serif; font-size: 14px; border: 1px solid #0284c7; border-radius: 6px; background: #ffffff; color: #0f172a; box-sizing: border-box; outline: none;">Paragraph 1 text. Paragraph 2 text.</textarea>
+    </div>
+    
+    <!-- Right Pane: Live Preview (Starts Empty) -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px; color: #0369a1;">Chat Window Preview:</label>
+      <div id="chat-output" style="width: 100%; height: 200px; padding: 12px; border: 1px solid #0284c7; border-radius: 6px; background: #ffffff; color: #0f172a; overflow-y: auto; box-sizing: border-box; white-space: pre-wrap; font-family: system-ui, -apple-system, sans-serif; font-size: 14px;"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const chatInput = document.getElementById('chat-input');
+  const chatOutput = document.getElementById('chat-output');
+  const chkMultiline = document.getElementById('chk-multiline');
+  const hintBanner = document.getElementById('hint-banner');
+  const successBanner = document.getElementById('success-banner');
+
+  let hasUsedShiftEnter = false;
+
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      if (e.shiftKey) {
+        // Successful Shift + Enter action
+        hasUsedShiftEnter = true;
+        hintBanner.style.display = 'none';
+        successBanner.style.display = 'block';
+        chkMultiline.style.display = 'list-item';
+        chkMultiline.style.color = '#0369a1';
+        chkMultiline.style.fontWeight = 'bold';
+      } else {
+        // Standard Enter pressed without Shift
+        e.preventDefault(); 
+        if (!hasUsedShiftEnter) {
+          chkMultiline.style.display = 'list-item';
+          hintBanner.style.display = 'block';
+          successBanner.style.display = 'none';
+        }
+      }
+    }
+  });
+
+  chatInput.addEventListener('input', () => {
+    chatOutput.textContent = chatInput.value;
+
+    // If they type anything and haven't used Shift+Enter correctly, trigger the hint/checklist
+    if (!hasUsedShiftEnter) {
+      chkMultiline.style.display = 'list-item';
+      hintBanner.style.display = 'block';
+      successBanner.style.display = 'none';
+    }
+  });
+</script>
