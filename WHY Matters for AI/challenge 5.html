@@ -1,0 +1,76 @@
+<div id="main-wrapper" style="font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 0 auto; color: #0f172a; background: #e0f2fe; padding: 25px; border-radius: 12px; border: 2px solid #38bdf8; box-sizing: border-box; transition: background 0.3s, border-color 0.3s;">
+  
+  <!-- Instructions & Challenges Box -->
+  <div style="background: #ffffff; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(3, 105, 161, 0.05);">
+    <h3 style="margin-top: 0; margin-bottom: 10px; color: #0369a1;">Interactive AI Chat - Challenge #5</h3>
+    <p style="margin-top: 0; font-size: 15px; line-height: 1.5; color: #334155;">
+      <strong>True or False</strong> While you can use Gifs and Emojis with markdown, to use an SVG file in an AI chat you have to wrap it in <code style="background:#e2e8f0; color:#0f172a; padding:2px 6px; border-radius:4px; font-family:monospace;">```svg ... ```</code> backticks.
+    </p>
+
+    <!-- True / False Buttons -->
+    <div id="button-container" style="display: flex; gap: 12px; margin-top: 15px;">
+      <button onclick="handleAnswer(true)" style="background: #0284c7; color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s;">True</button>
+      <button onclick="handleAnswer(false)" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1; padding: 10px 20px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s;">False</button>
+    </div>
+
+    <!-- Feedback Banner (Hidden Initially) -->
+    <div id="feedback-banner" style="display: none; margin-top: 15px; padding: 12px; border-radius: 5px; font-size: 14px; font-weight: bold; text-align: center;"></div>
+  </div>
+
+  <!-- Split Pane Editor (Hidden Until Answered) -->
+  <div id="editor-section" style="display: none; gap: 20px; flex-wrap: wrap;">
+    <!-- Left Pane: Input -->
+    <div style="flex: 1; min-width: 280px;">
+      <label for="chat-input" style="font-weight: bold; display: block; margin-bottom: 8px; color: #0369a1;">Type your SVG markdown block here:</label>
+      <textarea id="chat-input" style="width: 100%; height: 200px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; border: 1px solid #0284c7; border-radius: 6px; background: #ffffff; color: #0f172a; box-sizing: border-box; outline: none;">```svg
+<svg width="100" height="100" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+  <circle cx="50" cy="50" r="40" fill="#0284c7" />
+</svg>
+```</textarea>
+    </div>
+    
+    <!-- Right Pane: Live Preview -->
+    <div style="flex: 1; min-width: 280px;">
+      <label style="font-weight: bold; display: block; margin-bottom: 8px; color: #0369a1;">Chat Window Preview:</label>
+      <div id="chat-output" style="width: 100%; height: 200px; padding: 12px; border: 1px solid #0284c7; border-radius: 6px; background: #ffffff; color: #0f172a; overflow-y: auto; box-sizing: border-box; white-space: pre-wrap; font-family: system-ui, -apple-system, sans-serif; font-size: 14px;">```svg
+<svg width="100" height="100" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+  <circle cx="50" cy="50" r="40" fill="#0284c7" />
+</svg>
+```</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const feedbackBanner = document.getElementById('feedback-banner');
+  const editorSection = document.getElementById('editor-section');
+  const chatInput = document.getElementById('chat-input');
+  const chatOutput = document.getElementById('chat-output');
+
+  function handleAnswer(isTrue) {
+    feedbackBanner.style.display = 'block';
+    
+    if (isTrue) {
+      feedbackBanner.style.background = '#e2e8f0';
+      feedbackBanner.style.color = '#475569';
+      feedbackBanner.style.border = '1px solid #cbd5e1';
+      feedbackBanner.innerHTML = 'Nailed it! That is correct. SVG code-block wrapping unlocked, you are ready to share custom vector graphics with your AI agent!';
+      
+      // Reveal the bottom split-pane white boxes
+      editorSection.style.display = 'flex';
+    } else {
+      feedbackBanner.style.background = '#fee2e2';
+      feedbackBanner.style.color = '#991b1b';
+      feedbackBanner.style.border = '1px solid #f87171';
+      feedbackBanner.innerHTML = 'Not quite! Standard Markdown does not natively render raw SVG, so wrapping it in ```svg ... ``` code ticks is the correct way to share it cleanly in chat. Try clicking True!';
+      
+      // Keep the editor hidden on incorrect answers so they can retry
+      editorSection.style.display = 'none';
+    }
+  }
+
+  chatInput.addEventListener('input', () => {
+    chatOutput.textContent = chatInput.value;
+  });
+</script>
